@@ -1,0 +1,229 @@
+@import "tailwindcss";
+
+@theme {
+  --color-gold: #c9a96e;
+  --color-gold-light: #dfc799;
+  --color-gold-dark: #a8853f;
+  --color-cream: #f5f0e8;
+  --color-cream-dark: #e8dfd2;
+  --color-blush: #e8d5c4;
+  --color-charcoal: #0a0a0a;
+  --color-charcoal-light: #1a1a1a;
+  --color-charcoal-medium: #2a2a2a;
+  --color-warm-gray: #8a8078;
+  --color-warm-white: #faf8f5;
+
+  --font-heading: 'Cormorant Garamond', 'Georgia', serif;
+  --font-body: 'Montserrat', 'Helvetica Neue', sans-serif;
+  --font-script: 'Great Vibes', cursive;
+}
+
+/* ------------------------------------------------------------------
+   RESET + FOUNDATIONAL LAYOUT
+   Explicitly anchors html/body/#root to full width so every section
+   below inherits a centered layout context — no accidental shrinking.
+------------------------------------------------------------------ */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  width: 100%;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: var(--font-body);
+  background-color: var(--color-charcoal);
+  color: var(--color-cream);
+  overflow-x: hidden;
+  display: flex;
+  justify-content: center;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Prevent iOS from auto-zooming when focusing inputs with <16px font.
+   Enforce a 16px minimum on mobile; allow smaller on desktop if needed. */
+@media (max-width: 767px) {
+  input,
+  textarea,
+  select {
+    font-size: 16px !important;
+  }
+}
+
+/* Respect safe-area insets for notched devices */
+@supports (padding: max(0px)) {
+  body {
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+}
+
+/* Remove iOS default styling */
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+/* ------------------------------------------------------------------
+   CONTAINER PRIMITIVE
+   Every section composes its content inside .container-lux so every
+   block shares the same width, gutters, and horizontal centering.
+------------------------------------------------------------------ */
+.container-lux {
+  width: 100%;
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+@media (min-width: 480px) {
+  .container-lux {
+    padding-left: 1.75rem;
+    padding-right: 1.75rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .container-lux {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container-lux {
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+}
+
+.container-narrow {
+  width: 100%;
+  max-width: 880px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .container-narrow {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+}
+
+/* Sections always span full viewport width, content centers inside. */
+.section-lux {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+::selection {
+  background-color: rgba(201, 169, 110, 0.3);
+  color: var(--color-cream);
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(201, 169, 110, 0.12);
+  border-radius: 2px;
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(201, 169, 110, 0.35);
+}
+
+/* Firefox */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(201, 169, 110, 0.15) transparent;
+}
+
+/* ------------------------------------------------------------------
+   ORNAMENTAL UTILITIES
+------------------------------------------------------------------ */
+.gold-shimmer {
+  background: linear-gradient(
+    135deg,
+    var(--color-gold-dark) 0%,
+    var(--color-gold) 25%,
+    var(--color-gold-light) 50%,
+    var(--color-gold) 75%,
+    var(--color-gold-dark) 100%
+  );
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 4s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.gold-line {
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ornament {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 40px 0;
+}
+
+.ornament::before,
+.ornament::after {
+  content: '';
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+}
