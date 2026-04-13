@@ -1,23 +1,21 @@
-import Navigation from './components/Navigation';
-import Hero from './components/Hero';
-import CoupleSection from './components/CoupleSection';
-import EventDetails from './components/EventDetails';
-import RSVP from './components/RSVP';
-import Gallery from './components/Gallery';
-import Footer from './components/Footer';
+import SideNav from './components/SideNav';
+import HeroScene from './components/HeroScene';
+import InvitationScene from './components/InvitationScene';
+import EventsScene from './components/EventsScene';
+import RsvpScene from './components/RsvpScene';
+import GalleryScene from './components/GalleryScene';
+import FinalScene from './components/FinalScene';
 
 function App() {
   return (
-    <div className="w-full min-h-screen bg-charcoal text-cream flex flex-col items-center">
-      <Navigation />
-      <main className="w-full flex flex-col items-center">
-        <Hero />
-        <CoupleSection />
-        <EventDetails />
-        <RSVP />
-        <Gallery />
-      </main>
-      <Footer />
+    <div className="w-full bg-charcoal text-cream">
+      <SideNav />
+      <HeroScene />
+      <InvitationScene />
+      <EventsScene />
+      <RsvpScene />
+      <GalleryScene />
+      <FinalScene />
     </div>
   );
 }

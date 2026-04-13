@@ -1,17 +1,23 @@
 @import "tailwindcss";
 
 @theme {
-  --color-gold: #c9a96e;
-  --color-gold-light: #dfc799;
+  /* Champagne gold palette — richer, more ornate */
+  --color-gold: #d4b480;
+  --color-gold-light: #e8d4a8;
   --color-gold-dark: #a8853f;
-  --color-cream: #f5f0e8;
-  --color-cream-dark: #e8dfd2;
-  --color-blush: #e8d5c4;
-  --color-charcoal: #0a0a0a;
-  --color-charcoal-light: #1a1a1a;
-  --color-charcoal-medium: #2a2a2a;
-  --color-warm-gray: #8a8078;
-  --color-warm-white: #faf8f5;
+  --color-gold-deep: #8a6a2f;
+
+  /* Warm ivory / cream */
+  --color-cream: #f5ead8;
+  --color-cream-dark: #e8dbc2;
+  --color-blush: #e8cdb0;
+
+  /* Warm charcoal — not pure black, has brown undertones for warmth */
+  --color-charcoal: #0e0b08;
+  --color-charcoal-light: #1a1410;
+  --color-charcoal-medium: #2a2019;
+  --color-warm-gray: #8a7c6e;
+  --color-warm-white: #faf6ef;
 
   --font-heading: 'Cormorant Garamond', 'Georgia', serif;
   --font-body: 'Montserrat', 'Helvetica Neue', sans-serif;
