@@ -383,11 +383,12 @@ export default function RsvpScene() {
                         key={meal.value}
                         onClick={() => setMealChoice(meal.value)}
                         whileHover={{ x: 2 }}
-                        className={`w-full px-5 py-4 border text-left flex items-center justify-between gap-3 transition-all duration-300 ${
+                        className={`w-full py-4 border text-left flex items-center justify-between gap-3 transition-all duration-300 ${
                           selected
                             ? 'border-gold/40 bg-gold/8'
                             : 'border-gold/10 hover:border-gold/25 bg-charcoal/25'
                         }`}
+                        style={{ paddingLeft: 24, paddingRight: 20 }}
                       >
                         <p
                           className={`font-heading text-lg md:text-xl ${selected ? 'text-gold' : 'text-cream/80'}`}
@@ -410,8 +411,8 @@ export default function RsvpScene() {
                     onChange={(e) => setDietaryNotes(e.target.value)}
                     placeholder="Dietary notes (optional)"
                     rows={2}
-                    className="w-full bg-charcoal/25 border border-gold/10 focus:border-gold/30 p-4 text-cream font-body text-sm placeholder:text-cream/20 focus:outline-none transition-colors resize-none"
-                    style={{ marginTop: 8 }}
+                    className="w-full bg-charcoal/25 border border-gold/10 focus:border-gold/30 text-cream font-body text-sm placeholder:text-cream/20 focus:outline-none transition-colors resize-none"
+                    style={{ marginTop: 8, paddingTop: 14, paddingBottom: 14, paddingLeft: 24, paddingRight: 20 }}
                   />
                 </div>
 
