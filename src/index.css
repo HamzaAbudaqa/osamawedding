@@ -1,34 +1,41 @@
 @import "tailwindcss";
 
 @theme {
-  /* Champagne gold palette — richer, more ornate */
-  --color-gold: #d4b480;
-  --color-gold-light: #e8d4a8;
+  /* Refined champagne gold palette */
+  --color-gold: #c9a96e;
+  --color-gold-light: #e0cda0;
   --color-gold-dark: #a8853f;
   --color-gold-deep: #8a6a2f;
+  --color-gold-muted: #b8a07a;
 
-  /* Warm ivory / cream */
+  /* Warm ivory / cream spectrum */
   --color-cream: #f5ead8;
   --color-cream-dark: #e8dbc2;
   --color-blush: #e8cdb0;
+  --color-ivory: #faf6ef;
 
-  /* Warm charcoal — not pure black, has brown undertones for warmth */
-  --color-charcoal: #0e0b08;
-  --color-charcoal-light: #1a1410;
-  --color-charcoal-medium: #2a2019;
+  /* Layered warm darks — espresso, not black */
+  --color-charcoal: #0c0907;
+  --color-charcoal-light: #161210;
+  --color-charcoal-medium: #221c17;
+  --color-charcoal-warm: #2e251e;
+  --color-espresso: #1a1411;
   --color-warm-gray: #8a7c6e;
-  --color-warm-white: #faf6ef;
 
   --font-heading: 'Cormorant Garamond', 'Georgia', serif;
   --font-body: 'Montserrat', 'Helvetica Neue', sans-serif;
   --font-script: 'Great Vibes', cursive;
 }
 
-/* ------------------------------------------------------------------
-   RESET + FOUNDATIONAL LAYOUT
-   Explicitly anchors html/body/#root to full width so every section
-   below inherits a centered layout context — no accidental shrinking.
------------------------------------------------------------------- */
+/* ----------------------------------------------------------------
+   SPACING SCALE (strict 4-base system)
+   All vertical rhythm snaps to these values.
+   8 / 16 / 20 / 24 / 32 / 40 / 48 / 64 / 72 / 96 / 128
+---------------------------------------------------------------- */
+
+/* ----------------------------------------------------------------
+   RESET + FOUNDATION
+---------------------------------------------------------------- */
 *,
 *::before,
 *::after {
@@ -59,8 +66,6 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 
-/* Prevent iOS from auto-zooming when focusing inputs with <16px font.
-   Enforce a 16px minimum on mobile; allow smaller on desktop if needed. */
 @media (max-width: 767px) {
   input,
   textarea,
@@ -69,7 +74,6 @@ body {
   }
 }
 
-/* Respect safe-area insets for notched devices */
 @supports (padding: max(0px)) {
   body {
     padding-left: env(safe-area-inset-left);
@@ -77,7 +81,6 @@ body {
   }
 }
 
-/* Remove iOS default styling */
 button,
 a {
   -webkit-tap-highlight-color: transparent;
@@ -90,66 +93,6 @@ a {
   display: flex;
   flex-direction: column;
   align-items: stretch;
-}
-
-/* ------------------------------------------------------------------
-   CONTAINER PRIMITIVE
-   Every section composes its content inside .container-lux so every
-   block shares the same width, gutters, and horizontal centering.
------------------------------------------------------------------- */
-.container-lux {
-  width: 100%;
-  max-width: 1280px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
-}
-
-@media (min-width: 480px) {
-  .container-lux {
-    padding-left: 1.75rem;
-    padding-right: 1.75rem;
-  }
-}
-
-@media (min-width: 768px) {
-  .container-lux {
-    padding-left: 3rem;
-    padding-right: 3rem;
-  }
-}
-
-@media (min-width: 1280px) {
-  .container-lux {
-    padding-left: 4rem;
-    padding-right: 4rem;
-  }
-}
-
-.container-narrow {
-  width: 100%;
-  max-width: 880px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-}
-
-@media (min-width: 768px) {
-  .container-narrow {
-    padding-left: 3rem;
-    padding-right: 3rem;
-  }
-}
-
-/* Sections always span full viewport width, content centers inside. */
-.section-lux {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
 }
 
 ::selection {
@@ -168,22 +111,120 @@ a {
 ::-webkit-scrollbar-thumb {
   background: rgba(201, 169, 110, 0.12);
   border-radius: 2px;
-  transition: background 0.3s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(201, 169, 110, 0.35);
 }
 
-/* Firefox */
 html {
   scrollbar-width: thin;
   scrollbar-color: rgba(201, 169, 110, 0.15) transparent;
 }
 
-/* ------------------------------------------------------------------
+/* ----------------------------------------------------------------
+   CONTAINER PRIMITIVES
+   All content sections snap to these widths.
+---------------------------------------------------------------- */
+.container-content {
+  width: 100%;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 18px;
+  padding-right: 18px;
+}
+
+@media (min-width: 480px) {
+  .container-content {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container-content {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+
+.container-narrow {
+  width: 100%;
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 18px;
+  padding-right: 18px;
+}
+
+@media (min-width: 480px) {
+  .container-narrow {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container-narrow {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+
+/* ----------------------------------------------------------------
+   SECTION PADDING
+   56px mobile / 96px desktop standard.
+---------------------------------------------------------------- */
+.section-pad {
+  padding-top: 56px;
+  padding-bottom: 56px;
+}
+
+@media (min-width: 480px) {
+  .section-pad {
+    padding-top: 72px;
+    padding-bottom: 72px;
+  }
+}
+
+@media (min-width: 768px) {
+  .section-pad {
+    padding-top: 96px;
+    padding-bottom: 96px;
+  }
+}
+
+.section-pad-lg {
+  padding-top: 72px;
+  padding-bottom: 72px;
+}
+
+@media (min-width: 480px) {
+  .section-pad-lg {
+    padding-top: 96px;
+    padding-bottom: 96px;
+  }
+}
+
+@media (min-width: 768px) {
+  .section-pad-lg {
+    padding-top: 128px;
+    padding-bottom: 128px;
+  }
+}
+
+/* ----------------------------------------------------------------
+   FULL-HEIGHT HELPER — uses dvh on mobile to respect iOS address bar
+---------------------------------------------------------------- */
+.min-h-screen-safe {
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+/* ----------------------------------------------------------------
    ORNAMENTAL UTILITIES
------------------------------------------------------------------- */
+---------------------------------------------------------------- */
 .gold-shimmer {
   background: linear-gradient(
     135deg,
@@ -205,31 +246,35 @@ html {
   50% { background-position: 100% 50%; }
 }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-
 .gold-line {
-  width: 80px;
+  width: 56px;
   height: 1px;
   background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
   margin-left: auto;
   margin-right: auto;
 }
 
-.ornament {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  padding: 40px 0;
+/* Subtle noise texture overlay */
+.texture-overlay {
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
 }
 
-.ornament::before,
-.ornament::after {
-  content: '';
-  width: 60px;
+/* Section divider */
+.section-divider {
+  width: 100%;
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(201, 169, 110, 0.08) 20%,
+    rgba(201, 169, 110, 0.15) 50%,
+    rgba(201, 169, 110, 0.08) 80%,
+    transparent 100%
+  );
 }

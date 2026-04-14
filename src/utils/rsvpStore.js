@@ -1,71 +1,47 @@
 /**
- * RSVP Data Store
+ * RSVP submission → Google Sheets via Apps Script Web App.
  *
- * Data Model:
- * {
- *   id: string (UUID),
- *   submittedAt: ISO timestamp,
- *   primaryGuest: {
- *     fullName: string,
- *     email: string (optional),
- *   },
- *   guests: [
- *     {
- *       id: string (UUID),
- *       fullName: string,
- *       mealChoice: 'filet-mignon' | 'salmon' | 'chicken' | 'vegetarian' | 'vegan',
- *       dietaryNotes: string,
- *       isAttending: boolean,
- *     }
- *   ],
- *   message: string (optional note to the couple),
- * }
- *
- * Currently uses localStorage. Architected so the storage backend
- * can be swapped to Supabase, Firebase, or any REST API by replacing
- * the functions below.
+ * Configure the endpoint in `.env` as `VITE_RSVP_ENDPOINT`.
+ * See SHEETS_SETUP.md for the Apps Script and deploy steps.
  */
 
-const STORAGE_KEY = 'osama_joud_rsvps';
-
-function getAll() {
-  try {
-    const data = localStorage.getItem(STORAGE_KEY);
-    return data ? JSON.parse(data) : [];
-  } catch {
-    return [];
-  }
-}
-
-function save(rsvpParty) {
-  const all = getAll();
-  all.push({
-    ...rsvpParty,
-    submittedAt: new Date().toISOString(),
-  });
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(all));
-  return rsvpParty;
-}
-
-/**
- * Replace this function to connect to a real backend.
- * Expected signature: submitRSVP(party) => Promise<party>
- */
-export async function submitRSVP(party) {
-  // Simulate network latency for realistic UX
-  await new Promise((resolve) => setTimeout(resolve, 1200));
-  return save(party);
-}
-
-export async function getAllRSVPs() {
-  await new Promise((resolve) => setTimeout(resolve, 300));
-  return getAll();
-}
+const ENDPOINT = import.meta.env.VITE_RSVP_ENDPOINT;
 
 export const MEAL_OPTIONS = [
-  { value: 'filet-mignon', label: 'Filet Mignon', description: 'Pan-seared with truffle butter' },
-  { value: 'salmon', label: 'Atlantic Salmon', description: 'Herb-crusted with lemon beurre blanc' },
-  { value: 'chicken', label: 'Roasted Chicken', description: 'Free-range with rosemary jus' },
-  { value: 'vegetarian', label: 'Garden Risotto', description: 'Wild mushroom & parmesan risotto' },
-  { value: 'vegan', label: 'Grilled Vegetables', description: 'Seasonal vegetables with quinoa' },
+  { value: 'chicken', label: 'Chicken', description: '' },
+  { value: 'fish', label: 'Fish', description: '' },
+  { value: 'vegetarian', label: 'Vegetarian', description: '' },
 ];
+
+export async function submitRSVP(party) {
+  const guest = party.guests?.[0] ?? {};
+  const payload = {
+    submittedAt: new Date().toISOString(),
+    fullName: guest.fullName ?? party.primaryGuest?.fullName ?? '',
+    mealChoice: guest.mealChoice ?? '',
+    dietaryNotes: guest.dietaryNotes ?? '',
+  };
+
+  if (!ENDPOINT) {
+    console.warn(
+      '[RSVP] VITE_RSVP_ENDPOINT is not set. Submission logged to console only:',
+      payload,
+    );
+    await new Promise((r) => setTimeout(r, 600));
+    return payload;
+  }
+
+  // Apps Script web apps don't accept preflighted CORS requests,
+  // so we send as text/plain (simple request) and parse JSON on the server.
+  const res = await fetch(ENDPOINT, {
+    method: 'POST',
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    body: JSON.stringify(payload),
+  });
+
+  if (!res.ok) {
+    throw new Error(`RSVP submit failed: ${res.status}`);
+  }
+
+  return payload;
+}

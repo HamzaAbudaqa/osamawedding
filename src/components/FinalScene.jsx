@@ -1,40 +1,52 @@
 import { motion } from 'framer-motion';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 
+/**
+ * FINAL — graceful farewell.
+ *
+ * Rhythm:
+ *   top ornament → quote     48px
+ *   quote → attribution      16px
+ *   attribution → names      64px
+ *   names → date             24px
+ *   date → farewell          32px
+ *   farewell → ornament      48px
+ */
 export default function FinalScene() {
-  const [ref, inView] = useScrollReveal(0.3);
+  const [ref, inView] = useScrollReveal(0.15);
 
   return (
     <section
       ref={ref}
       id="final"
-      className="relative min-h-screen w-full flex items-center justify-center overflow-hidden"
+      className="relative w-full flex items-center justify-center overflow-hidden section-pad"
     >
       {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-charcoal via-charcoal-light to-black" />
+      <div className="absolute inset-0 bg-gradient-to-b from-charcoal via-espresso to-charcoal" />
       <div
         className="absolute inset-0"
         style={{
           background:
-            'radial-gradient(ellipse 55% 50% at 50% 50%, rgba(212,180,128,0.15), transparent 70%)',
+            'radial-gradient(ellipse 45% 40% at 50% 50%, rgba(201,169,110,0.09), transparent 70%)',
         }}
       />
+      <div className="texture-overlay" />
 
-      {/* Slow drifting particles */}
-      {[...Array(20)].map((_, i) => (
+      {/* Particles */}
+      {[...Array(10)].map((_, i) => (
         <motion.div
           key={i}
-          className="absolute w-px h-px rounded-full bg-gold-light/50"
+          className="absolute w-px h-px rounded-full bg-gold-light/25"
           style={{
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
+            left: `${20 + Math.random() * 60}%`,
+            top: `${20 + Math.random() * 60}%`,
           }}
           animate={{
-            y: [0, -30 - Math.random() * 50, 0],
-            opacity: [0.1, 0.6, 0.1],
+            y: [0, -20 - Math.random() * 30, 0],
+            opacity: [0.05, 0.3, 0.05],
           }}
           transition={{
-            duration: 6 + Math.random() * 6,
+            duration: 7 + Math.random() * 5,
             delay: Math.random() * 4,
             repeat: Infinity,
             ease: 'easeInOut',
@@ -42,54 +54,46 @@ export default function FinalScene() {
         />
       ))}
 
-      <div className="relative z-10 flex flex-col items-center text-center px-6 max-w-3xl">
+      <div className="relative z-10 flex flex-col items-center text-center px-5 max-w-md">
         {/* Top ornament */}
         <motion.div
           initial={{ opacity: 0, scaleX: 0 }}
           animate={inView ? { opacity: 1, scaleX: 1 } : {}}
-          transition={{ duration: 1.4, delay: 0.2 }}
-          className="flex items-center gap-4 mb-14 md:mb-16"
+          transition={{ duration: 1.2, delay: 0.15 }}
+          className="flex items-center gap-3"
+          style={{ marginBottom: 48 }}
         >
-          <span className="w-16 md:w-28 h-px bg-gradient-to-r from-transparent to-gold/60" />
-          <span className="w-1.5 h-1.5 rounded-full bg-gold/70" />
-          <span className="w-16 md:w-28 h-px bg-gradient-to-l from-transparent to-gold/60" />
+          <span className="w-12 md:w-20 h-px bg-gradient-to-r from-transparent to-gold/35" />
+          <span className="w-1 h-1 rounded-full bg-gold/45" />
+          <span className="w-12 md:w-20 h-px bg-gradient-to-l from-transparent to-gold/35" />
         </motion.div>
 
         {/* Quote */}
-        <motion.p
-          initial={{ opacity: 0, y: 20, filter: 'blur(8px)' }}
-          animate={inView ? { opacity: 1, y: 0, filter: 'blur(0px)' } : {}}
-          transition={{ duration: 1.6, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-          className="font-heading italic text-2xl md:text-4xl text-cream/80 leading-relaxed mb-4"
+        <motion.blockquote
+          initial={{ opacity: 0, y: 12 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 1.3, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
         >
-          "In all the world, there is no heart
-        </motion.p>
-        <motion.p
-          initial={{ opacity: 0, y: 20, filter: 'blur(8px)' }}
-          animate={inView ? { opacity: 1, y: 0, filter: 'blur(0px)' } : {}}
-          transition={{ duration: 1.6, delay: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="font-heading italic text-2xl md:text-4xl text-cream/80 leading-relaxed"
-        >
-          for me like yours."
-        </motion.p>
+          <p className="font-heading italic text-lg md:text-2xl text-cream/70 leading-[1.55]">
+            "In all the world, there is no heart
+          </p>
+          <p className="font-heading italic text-lg md:text-2xl text-cream/70 leading-[1.55]">
+            for me like yours."
+          </p>
+        </motion.blockquote>
 
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
-          transition={{ duration: 1, delay: 1.3 }}
-          className="font-body text-[10px] tracking-[0.4em] uppercase text-gold/55 mt-5"
-        >
-          — Maya Angelou
-        </motion.p>
+        {/* Couple names */}
+        <div style={{ marginTop: 64 }} />
 
-        {/* Couple names in script */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
+          initial={{ opacity: 0, scale: 0.97 }}
           animate={inView ? { opacity: 1, scale: 1 } : {}}
-          transition={{ duration: 1.8, delay: 1.6, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-20 md:mt-24"
+          transition={{ duration: 1.5, delay: 1.2, ease: [0.22, 1, 0.36, 1] }}
         >
-          <p className="font-script text-6xl md:text-8xl gold-shimmer leading-[1.2] pb-2">
+          <p
+            className="font-script gold-shimmer leading-[1.2]"
+            style={{ fontSize: 'clamp(2.75rem, 11vw, 4rem)' }}
+          >
             Osama &amp; Joud
           </p>
         </motion.div>
@@ -98,22 +102,24 @@ export default function FinalScene() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
-          transition={{ duration: 1.2, delay: 2.1 }}
-          className="mt-10 flex items-center gap-4"
+          transition={{ duration: 1, delay: 1.6 }}
+          className="flex items-center gap-3"
+          style={{ marginTop: 24 }}
         >
-          <span className="w-10 h-px bg-gold/40" />
-          <p className="font-body text-[10px] md:text-xs tracking-[0.45em] uppercase text-cream/60">
-            15 &middot; 08 &middot; 2026
+          <span className="w-7 h-px bg-gold/30" />
+          <p className="font-body text-[10px] tracking-[0.4em] uppercase text-cream/45">
+            21 &middot; 08 &middot; 2026
           </p>
-          <span className="w-10 h-px bg-gold/40" />
+          <span className="w-7 h-px bg-gold/30" />
         </motion.div>
 
-        {/* Thank you */}
+        {/* Farewell */}
         <motion.p
-          initial={{ opacity: 0, y: 15 }}
+          initial={{ opacity: 0, y: 6 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 1.2, delay: 2.4 }}
-          className="font-heading italic text-lg md:text-xl text-cream/50 mt-16 max-w-md leading-relaxed"
+          transition={{ duration: 1, delay: 1.9 }}
+          className="font-heading italic text-sm md:text-base text-cream/40 max-w-xs leading-relaxed"
+          style={{ marginTop: 32 }}
         >
           Thank you for being part of our story.
         </motion.p>
@@ -122,12 +128,13 @@ export default function FinalScene() {
         <motion.div
           initial={{ opacity: 0, scaleX: 0 }}
           animate={inView ? { opacity: 1, scaleX: 1 } : {}}
-          transition={{ duration: 1.4, delay: 2.7 }}
-          className="flex items-center gap-4 mt-14 md:mt-20"
+          transition={{ duration: 1.2, delay: 2.2 }}
+          className="flex items-center gap-3"
+          style={{ marginTop: 48 }}
         >
-          <span className="w-16 md:w-28 h-px bg-gradient-to-r from-transparent to-gold/60" />
-          <span className="w-1.5 h-1.5 rounded-full bg-gold/70" />
-          <span className="w-16 md:w-28 h-px bg-gradient-to-l from-transparent to-gold/60" />
+          <span className="w-12 md:w-20 h-px bg-gradient-to-r from-transparent to-gold/35" />
+          <span className="w-1 h-1 rounded-full bg-gold/45" />
+          <span className="w-12 md:w-20 h-px bg-gradient-to-l from-transparent to-gold/35" />
         </motion.div>
       </div>
     </section>

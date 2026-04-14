@@ -1,20 +1,21 @@
 import SideNav from './components/SideNav';
 import HeroScene from './components/HeroScene';
 import InvitationScene from './components/InvitationScene';
-import EventsScene from './components/EventsScene';
 import RsvpScene from './components/RsvpScene';
-import GalleryScene from './components/GalleryScene';
 import FinalScene from './components/FinalScene';
+import WelcomeOverlay from './components/WelcomeOverlay';
 
 function App() {
   return (
     <div className="w-full bg-charcoal text-cream">
+      <WelcomeOverlay />
       <SideNav />
       <HeroScene />
+      <div className="section-divider" />
       <InvitationScene />
-      <EventsScene />
+      <div className="section-divider" />
       <RsvpScene />
-      <GalleryScene />
+      <div className="section-divider" />
       <FinalScene />
     </div>
   );
