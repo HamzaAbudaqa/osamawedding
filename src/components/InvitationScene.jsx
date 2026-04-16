@@ -127,10 +127,10 @@ export default function InvitationScene() {
               style={{ marginBottom: 48 }}
             >
               <p className="font-heading text-base md:text-xl text-cream/75 leading-relaxed">
-                Friday, the Twenty-First of August
+                Friday, the 21st of August
               </p>
               <p className="font-heading text-base md:text-xl text-cream/75 leading-relaxed">
-                Two Thousand and Twenty-Six
+                2026
               </p>
               <p
                 className="font-heading italic text-sm md:text-base text-gold/70 leading-relaxed"
