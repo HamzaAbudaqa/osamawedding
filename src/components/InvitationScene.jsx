@@ -238,13 +238,16 @@ export default function InvitationScene() {
               initial={{ opacity: 0 }}
               animate={inView ? { opacity: 1 } : {}}
               transition={{ duration: 1, delay: 2 }}
-              className="flex flex-col items-center"
-              style={{ marginTop: 40 }}
+              className="flex flex-col items-center w-full"
+              style={{ marginTop: 44 }}
             >
-              <p className="font-body text-[10px] tracking-[0.4em] uppercase text-gold/55" style={{ marginBottom: 12 }}>
+              <p
+                className="font-body text-xs md:text-[13px] tracking-[0.4em] uppercase text-gold/80"
+                style={{ marginBottom: 16 }}
+              >
                 An Adults-Only Celebration
               </p>
-              <p className="font-heading italic text-xs md:text-sm text-cream/45 leading-relaxed max-w-[280px] text-center">
+              <p className="font-heading italic text-base md:text-xl text-cream/80 leading-relaxed max-w-[440px] text-center">
                 While we love your little ones, we kindly ask that our celebration remain adults-only. Thank you for understanding.
               </p>
             </motion.div>

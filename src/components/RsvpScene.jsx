@@ -171,11 +171,11 @@ export default function RsvpScene() {
           initial={{ opacity: 0, y: 8 }}
           animate={sectionInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 1, delay: 0.45 }}
-          className="font-heading italic text-sm md:text-base text-cream/55 text-center max-w-sm"
+          className="font-heading italic text-lg md:text-2xl text-cream/85 text-center max-w-xl leading-relaxed"
           style={{ marginBottom: 48 }}
         >
           Kindly respond by{' '}
-          <span className="text-gold/85 not-italic tracking-wide">June 15</span>
+          <span className="text-gold not-italic tracking-wide font-normal">June 15</span>
           {' '}so we may have an accurate headcount.
         </motion.p>
 
