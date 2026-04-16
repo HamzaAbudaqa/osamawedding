@@ -1,6 +1,19 @@
 import { motion } from 'framer-motion';
-import { MapPin } from 'lucide-react';
+import { MapPin, CalendarPlus, Navigation } from 'lucide-react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
+
+const VENUE_NAME = 'Olympia Reception Halls';
+const VENUE_ADDRESS = 'Boulevard Saint-Jean, Dollard-Des Ormeaux, QC, Canada';
+const DIRECTIONS_URL = 'https://maps.app.goo.gl/eXmKpUyCVKCytSGJ6?g_st=iw';
+const MAP_EMBED_URL =
+  'https://maps.google.com/maps?q=Olympia+Reception+Halls+Dollard-Des+Ormeaux&t=&z=15&ie=UTF8&iwloc=&output=embed';
+const CALENDAR_URL =
+  'https://www.google.com/calendar/render?action=TEMPLATE' +
+  '&text=Osama+%26+Joud%27s+Wedding' +
+  '&dates=20260821T180000/20260821T230000' +
+  '&ctz=America/Toronto' +
+  '&location=Olympia+Reception+Halls%2C+Boulevard+Saint-Jean%2C+Dollard-Des+Ormeaux%2C+QC%2C+Canada' +
+  '&details=Join+us+as+we+celebrate+the+marriage+of+Osama+%26+Joud.';
 
 /**
  * INVITATION — ceremonial framed card.
@@ -119,6 +132,12 @@ export default function InvitationScene() {
               <p className="font-heading text-base md:text-xl text-cream/75 leading-relaxed">
                 Two Thousand and Twenty-Six
               </p>
+              <p
+                className="font-heading italic text-sm md:text-base text-gold/70 leading-relaxed"
+                style={{ marginTop: 10 }}
+              >
+                at Six o'Clock in the Evening
+              </p>
             </motion.div>
 
             {/* Location — separated rule */}
@@ -126,29 +145,108 @@ export default function InvitationScene() {
               initial={{ opacity: 0, y: 6 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 1, delay: 1.7 }}
-              className="w-full max-w-[240px] flex flex-col items-center border-t border-gold/12"
-              style={{ paddingTop: 28 }}
+              className="w-full flex flex-col items-center border-t border-gold/12"
+              style={{ paddingTop: 32 }}
             >
               <p
                 className="font-body text-[10px] tracking-[0.4em] uppercase text-gold/55"
-                style={{ marginBottom: 16 }}
+                style={{ marginBottom: 20 }}
               >
                 Location
               </p>
-              <a
-                href="https://maps.app.goo.gl/eXmKpUyCVKCytSGJ6?g_st=iw"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group inline-flex items-center gap-2.5 rounded-full border border-gold/40 text-gold text-[10px] md:text-[11px] tracking-[0.3em] uppercase hover:bg-gold/10 hover:border-gold/70 active:bg-gold/15 transition-all duration-500"
-                style={{
-                  paddingInline: 28,
-                  paddingBlock: 14,
-                  minHeight: 44,
-                }}
+
+              {/* Venue name + address */}
+              <div
+                className="flex items-start justify-center gap-3 max-w-[340px]"
+                style={{ marginBottom: 24 }}
               >
-                <MapPin className="w-3.5 h-3.5" strokeWidth={1.4} />
-                <span>View on Map</span>
-              </a>
+                <MapPin
+                  className="w-4 h-4 text-gold/70 flex-shrink-0"
+                  strokeWidth={1.4}
+                  style={{ marginTop: 4 }}
+                />
+                <div className="flex flex-col items-start text-left">
+                  <p className="font-heading text-base md:text-lg text-cream/85 leading-snug">
+                    {VENUE_NAME}
+                  </p>
+                  <p
+                    className="font-body text-xs md:text-sm text-cream/50 leading-relaxed"
+                    style={{ marginTop: 4 }}
+                  >
+                    {VENUE_ADDRESS}
+                  </p>
+                </div>
+              </div>
+
+              {/* Action buttons */}
+              <div
+                className="flex flex-wrap items-center justify-center gap-2.5"
+                style={{ marginBottom: 28 }}
+              >
+                <a
+                  href={CALENDAR_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group inline-flex items-center gap-2 rounded-full border border-gold/40 text-gold text-[10px] md:text-[11px] tracking-[0.3em] uppercase hover:bg-gold/10 hover:border-gold/70 active:bg-gold/15 transition-all duration-500"
+                  style={{
+                    paddingInline: 22,
+                    paddingBlock: 13,
+                    minHeight: 44,
+                  }}
+                >
+                  <CalendarPlus className="w-3.5 h-3.5" strokeWidth={1.4} />
+                  <span>Add to Calendar</span>
+                </a>
+                <a
+                  href={DIRECTIONS_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group inline-flex items-center gap-2 rounded-full border border-gold/40 text-gold text-[10px] md:text-[11px] tracking-[0.3em] uppercase hover:bg-gold/10 hover:border-gold/70 active:bg-gold/15 transition-all duration-500"
+                  style={{
+                    paddingInline: 22,
+                    paddingBlock: 13,
+                    minHeight: 44,
+                  }}
+                >
+                  <Navigation className="w-3.5 h-3.5" strokeWidth={1.4} />
+                  <span>Directions</span>
+                </a>
+              </div>
+
+              {/* Embedded map */}
+              <div
+                className="relative w-full max-w-[460px] overflow-hidden border border-gold/20"
+                style={{ aspectRatio: '4 / 3' }}
+              >
+                <iframe
+                  title="Venue map"
+                  src={MAP_EMBED_URL}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="absolute inset-0 w-full h-full"
+                  style={{
+                    border: 0,
+                    filter: 'saturate(0.78) brightness(0.92) contrast(0.96)',
+                  }}
+                />
+                <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-gold/15" />
+              </div>
+            </motion.div>
+
+            {/* Adults-only note */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={inView ? { opacity: 1 } : {}}
+              transition={{ duration: 1, delay: 2 }}
+              className="flex flex-col items-center"
+              style={{ marginTop: 40 }}
+            >
+              <p className="font-body text-[10px] tracking-[0.4em] uppercase text-gold/55" style={{ marginBottom: 12 }}>
+                An Adults-Only Celebration
+              </p>
+              <p className="font-heading italic text-xs md:text-sm text-cream/45 leading-relaxed max-w-[280px] text-center">
+                While we love your little ones, we kindly ask that our celebration remain adults-only. Thank you for understanding.
+              </p>
             </motion.div>
           </div>
         </motion.div>

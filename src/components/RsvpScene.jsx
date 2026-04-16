@@ -164,8 +164,20 @@ export default function RsvpScene() {
           animate={sectionInView ? { opacity: 1, scaleX: 1 } : {}}
           transition={{ duration: 1.2, delay: 0.3 }}
           className="gold-line"
-          style={{ marginBottom: 48 }}
+          style={{ marginBottom: 28 }}
         />
+
+        <motion.p
+          initial={{ opacity: 0, y: 8 }}
+          animate={sectionInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 1, delay: 0.45 }}
+          className="font-heading italic text-sm md:text-base text-cream/55 text-center max-w-sm"
+          style={{ marginBottom: 48 }}
+        >
+          Kindly respond by{' '}
+          <span className="text-gold/85 not-italic tracking-wide">June 15</span>
+          {' '}so we may have an accurate headcount.
+        </motion.p>
 
         {/* Step progress */}
         {!submitted && step > 0 && (
