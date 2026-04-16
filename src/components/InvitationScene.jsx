@@ -126,11 +126,8 @@ export default function InvitationScene() {
               className="flex flex-col items-center gap-1"
               style={{ marginBottom: 48 }}
             >
-              <p className="font-heading text-base md:text-xl text-cream/75 leading-relaxed">
-                Friday, the 21st of August
-              </p>
-              <p className="font-heading text-base md:text-xl text-cream/75 leading-relaxed">
-                2026
+              <p className="font-heading text-base md:text-xl text-cream/75 leading-relaxed whitespace-nowrap">
+                Friday, the 21st of August, 2026
               </p>
               <p
                 className="font-heading italic text-sm md:text-base text-gold/70 leading-relaxed"
