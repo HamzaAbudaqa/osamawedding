@@ -9,7 +9,7 @@ const ENDPOINT = import.meta.env.VITE_RSVP_ENDPOINT;
 
 export const MEAL_OPTIONS = [
   { value: 'chicken', label: 'Chicken', description: '' },
-  { value: 'fish', label: 'Fish', description: '' },
+  { value: 'salmon', label: 'Salmon', description: '' },
   { value: 'vegetarian', label: 'Vegetarian', description: '' },
 ];
 
