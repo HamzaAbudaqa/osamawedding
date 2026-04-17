@@ -91,8 +91,8 @@ export default function FinalScene() {
           transition={{ duration: 1.5, delay: 1.2, ease: [0.22, 1, 0.36, 1] }}
         >
           <p
-            className="font-script gold-shimmer leading-[1.2]"
-            style={{ fontSize: 'clamp(2.75rem, 11vw, 4rem)' }}
+            className="font-script gold-shimmer leading-[1.5]"
+            style={{ fontSize: 'clamp(2.75rem, 11vw, 4rem)', paddingTop: '0.15em', paddingRight: '0.1em' }}
           >
             Osama &amp; Joud
           </p>
