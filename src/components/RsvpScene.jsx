@@ -186,7 +186,7 @@ export default function RsvpScene() {
           className="font-body text-[10px] tracking-[0.35em] uppercase text-gold/55 text-center"
           style={{ marginBottom: 48 }}
         >
-          We kindly request no box gifts
+          We kindly request no boxed gifts, please
         </motion.p>
 
         {/* Step progress */}
