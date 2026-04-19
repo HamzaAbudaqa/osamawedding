@@ -172,11 +172,21 @@ export default function RsvpScene() {
           animate={sectionInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 1, delay: 0.45 }}
           className="font-heading italic text-lg md:text-2xl text-cream/85 text-center max-w-xl leading-relaxed"
-          style={{ marginBottom: 48 }}
+          style={{ marginBottom: 24 }}
         >
           Kindly respond by{' '}
           <span className="text-gold not-italic tracking-wide font-normal">June 15</span>
           {' '}so we may have an accurate headcount.
+        </motion.p>
+
+        <motion.p
+          initial={{ opacity: 0, y: 8 }}
+          animate={sectionInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 1, delay: 0.55 }}
+          className="font-body text-[10px] tracking-[0.35em] uppercase text-gold/55 text-center"
+          style={{ marginBottom: 48 }}
+        >
+          We kindly request no box gifts
         </motion.p>
 
         {/* Step progress */}
