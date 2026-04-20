@@ -186,7 +186,7 @@ export default function RsvpScene() {
           className="font-body text-[10px] tracking-[0.35em] uppercase text-gold/55 text-center"
           style={{ marginBottom: 48 }}
         >
-          We kindly request no boxed gifts, please
+          Having you share in our special day is a gift in itself. Should you wish to honor us with a gift, we kindly request no boxed gifts.
         </motion.p>
 
         {/* Step progress */}
